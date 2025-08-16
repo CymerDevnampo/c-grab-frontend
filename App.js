@@ -8,6 +8,7 @@ import RegisterScreen from './screens/RegisterScreen';
 import HomeScreen from './screens/HomeScreen';
 import TabsScreen from './tabs';
 import Toast from 'react-native-toast-message';
+import DrawerNavigator from './DrawerNavigator';
 
 const Stack = createNativeStackNavigator();
 
@@ -19,7 +20,7 @@ export default function App() {
     const checkToken = async () => {
       try {
         const token = await AsyncStorage.getItem('token');
-        setIsAuthenticated(!!token); // true if token exists
+        setIsAuthenticated(!!token);
       } catch (e) {
         console.error(e);
       } finally {
@@ -42,13 +43,19 @@ export default function App() {
       <NavigationContainer>
         <Stack.Navigator screenOptions={{ headerShown: false }}>
           {isAuthenticated ? (
-            <Stack.Screen name="Tabs">
-              {(props) => <TabsScreen {...props} setIsAuthenticated={setIsAuthenticated} />}
+            // 🔹 Authenticated users get Drawer (burger menu + notification)
+            <Stack.Screen name="Drawer">
+              {(props) => (
+                <DrawerNavigator {...props} setIsAuthenticated={setIsAuthenticated} />
+              )}
             </Stack.Screen>
           ) : (
+            // 🔹 Unauthenticated users see login/register
             <>
               <Stack.Screen name="Login">
-                {(props) => <LoginScreen {...props} setIsAuthenticated={setIsAuthenticated} />}
+                {(props) => (
+                  <LoginScreen {...props} setIsAuthenticated={setIsAuthenticated} />
+                )}
               </Stack.Screen>
               <Stack.Screen name="Register" component={RegisterScreen} />
             </>
@@ -59,3 +66,4 @@ export default function App() {
     </>
   );
 }
+

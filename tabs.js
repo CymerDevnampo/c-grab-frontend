@@ -3,8 +3,8 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import HomeScreen from './screens/HomeScreen';
 import ProfileScreen from './screens/ProfileScreen';
 import { Ionicons } from '@expo/vector-icons';
-import { Settings } from 'react-native';
 import SettingsScreen from './screens/SettingsScreen';
+import CartScreen from './screens/CartScreen';
 
 const Tab = createBottomTabNavigator();
 
@@ -12,7 +12,7 @@ export default function Tabs({ setIsAuthenticated }) {
     return (
         <Tab.Navigator
             screenOptions={({ route }) => ({
-                headerShown: false,
+                headerShown: false,   // ✅ FIXED: hide header properly
                 tabBarIcon: ({ focused, color, size }) => {
                     let iconName;
                     if (route.name === 'Home') {
@@ -34,7 +34,7 @@ export default function Tabs({ setIsAuthenticated }) {
             <Tab.Screen name="Profile">
                 {() => <ProfileScreen setIsAuthenticated={setIsAuthenticated} />}
             </Tab.Screen>
-            <Tab.Screen name="Cart" component={SettingsScreen} />
+            <Tab.Screen name="Cart" component={CartScreen} />
             <Tab.Screen name="Settings" component={SettingsScreen} />
         </Tab.Navigator>
     );
