@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, Button, Alert, StyleSheet } from 'react-native';
 import Toast from 'react-native-toast-message';
+import Api from '../api';
 
 export default function RegisterScreen({ navigation }) {
     const [name, setName] = useState('');
@@ -9,15 +10,20 @@ export default function RegisterScreen({ navigation }) {
 
     const handleRegister = async () => {
         try {
-            let response = await fetch("http://192.168.1.24:1000/api/register", {
-                method: 'POST',
-                headers: {
-                    "Content-Type": "application/json",
-                    'Accept': 'application/json',
-                },
-                body: JSON.stringify({ name, email, password })
+            // let response = await fetch("http://192.168.1.24:1000/api/register", {
+            //     method: 'POST',
+            //     headers: {
+            //         "Content-Type": "application/json",
+            //         'Accept': 'application/json',
+            //     },
+            //     body: JSON.stringify({ name, email, password })
+            // });
+            // let json = await response.json();
+
+            const { response, json } = await Api.post('/register', {
+                name, email, password
             });
-            let json = await response.json();
+
             if (response.ok) {
                 Toast.show({
                     type: 'success',
