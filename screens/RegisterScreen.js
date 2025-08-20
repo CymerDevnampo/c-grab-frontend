@@ -20,7 +20,7 @@ export default function RegisterScreen({ navigation }) {
             // });
             // let json = await response.json();
 
-            const { response, json } = await Api.post('/register', {
+            const { response, json } = await Api.post('register', {
                 name, email, password
             });
 

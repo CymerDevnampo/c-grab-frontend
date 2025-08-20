@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, TextInput, Button, StyleSheet } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Toast from 'react-native-toast-message';
+import Api from '../api';
 
 export default function LoginScreen({ navigation, setIsAuthenticated }) {
     const [email, setEmail] = useState('');
@@ -18,19 +19,22 @@ export default function LoginScreen({ navigation, setIsAuthenticated }) {
         }
 
         try {
-            const response = await fetch('http://192.168.1.24:1000/api/login', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Accept': 'application/json',
-                },
-                body: JSON.stringify({ email, password }),
+            // const response = await fetch('http://127.0.0.1:8000/api/login', {
+            //     method: 'POST',
+            //     headers: {
+            //         'Content-Type': 'application/json',
+            //         'Accept': 'application/json',
+            //     },
+            //     body: JSON.stringify({ email, password }),
+            // });
+            // const json = await response.json();
+
+            const { response, json } = await Api.post('login', {
+                email, password
             });
 
-            const data = await response.json();
-
             if (response.ok) {
-                await AsyncStorage.setItem('token', data.token);
+                await AsyncStorage.setItem('token', json.token);
                 setIsAuthenticated(true);
                 navigation.reset({
                     index: 0,
@@ -38,9 +42,9 @@ export default function LoginScreen({ navigation, setIsAuthenticated }) {
                 });
             } else {
                 // If Laravel sends detailed validation errors
-                let message = data.message;
-                if (data.errors) {
-                    const firstError = Object.values(data.errors)[0][0];
+                let message = json.message;
+                if (json.errors) {
+                    const firstError = Object.values(json.errors)[0][0];
                     message = firstError;
                 }
 

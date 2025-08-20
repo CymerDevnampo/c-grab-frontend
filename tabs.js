@@ -31,11 +31,21 @@ export default function Tabs({ setIsAuthenticated }) {
             })}
         >
             <Tab.Screen name="Home" component={HomeScreen} />
+
             <Tab.Screen name="Profile">
                 {() => <ProfileScreen setIsAuthenticated={setIsAuthenticated} />}
             </Tab.Screen>
+
+            <Tab.Screen name="Settings">
+                {() => <SettingsScreen setIsAuthenticated={setIsAuthenticated} />}
+            </Tab.Screen>
+
             <Tab.Screen name="Cart" component={CartScreen} />
-            <Tab.Screen name="Settings" component={SettingsScreen} />
+
+            {/* <Tab.Screen name="Cart">
+                {() => <CartScreen setIsAuthenticated={setIsAuthenticated} />}
+            </Tab.Screen> */}
+
         </Tab.Navigator>
     );
 }
