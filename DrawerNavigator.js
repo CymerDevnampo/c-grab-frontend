@@ -4,6 +4,7 @@ import { TouchableOpacity } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import TabsScreen from './tabs';
 import SubscriptionScreen from './screens/Subscription';
+import TaskerSubscriptionScreen from './screens/TaskerSubscription.js';
 
 const Drawer = createDrawerNavigator();
 
@@ -23,6 +24,7 @@ export default function DrawerNavigator({ setIsAuthenticated }) {
                 {(props) => <TabsScreen {...props} setIsAuthenticated={setIsAuthenticated} />}
             </Drawer.Screen>
             <Drawer.Screen name="Subscription" component={SubscriptionScreen} />
+            <Drawer.Screen name="Be a Campus Courier" component={TaskerSubscriptionScreen} />
         </Drawer.Navigator>
     );
 }

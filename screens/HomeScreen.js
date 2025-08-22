@@ -2,8 +2,8 @@ import React from 'react';
 import { ScrollView, View, StyleSheet, Text as RNText } from 'react-native';
 import { Avatar, Button, Card, Text } from 'react-native-paper';
 
-const cancelBtn = () => alert('Cancel');
-const okBtn = () => alert('Ok');
+// const cancelBtn = () => alert('Cancel');
+const addToCartBtn = () => alert('Ok');
 
 export default function HomeScreen() {
     return (
@@ -19,9 +19,9 @@ export default function HomeScreen() {
                             <Text variant="bodyMedium">Card content</Text>
                         </Card.Content>
                         <Card.Cover source={{ uri: 'https://picsum.photos/200' }} />
-                        <Card.Actions>
-                            <Button onPress={cancelBtn}>Cancel</Button>
-                            <Button onPress={okBtn}>Ok</Button>
+                        <Card.Actions style={styles.actionBtn}>
+                            {/* <Button onPress={cancelBtn}>Cancel</Button> */}
+                            <Button onPress={addToCartBtn}>Add to cart</Button>
                         </Card.Actions>
                     </Card>
                 ))}
@@ -48,5 +48,8 @@ const styles = StyleSheet.create({
     card: {
         width: '48%', // 2 columns with space
         marginBottom: 10
+    },
+    actionBtn: {
+        justifyContent: 'center'
     }
 });

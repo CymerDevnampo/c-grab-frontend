@@ -65,7 +65,7 @@ export default function LoginScreen({ navigation, setIsAuthenticated }) {
 
     return (
         <View style={styles.container}>
-            <Text style={styles.heading}>Login</Text>
+            <Text style={styles.heading}>Login Campus Grub</Text>
             <TextInput
                 style={styles.input}
                 placeholder="Email"

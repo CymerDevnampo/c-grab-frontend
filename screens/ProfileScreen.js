@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, Image, StyleSheet, TouchableOpacity, ActivityIndicator, TextInput, } from 'react-native';
 import * as DocumentPicker from 'expo-document-picker';
+import * as FileSystem from 'expo-file-system';
 import Toast from 'react-native-toast-message';
 import Api from '../api';
 import Icon from 'react-native-vector-icons/Feather';
@@ -52,7 +53,9 @@ export default function ProfileScreen({ navigation }) {
                 try {
                     setAvatarLoading(true);
 
-                    const base64Data = selectedImage.uri.split(',')[1];
+                    const base64Data = await FileSystem.readAsStringAsync(selectedImage.uri, {
+                        encoding: FileSystem.EncodingType.Base64,
+                    });
 
                     const { response: res, json } = await Api.post('update/profile', {
                         avatar_base64: base64Data,

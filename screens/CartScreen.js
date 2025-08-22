@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, FlatList, Image, CheckBox } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, FlatList, Image } from 'react-native';
+import CheckBox from '@react-native-community/checkbox';
 
 export default function CartScreen({ navigation }) {
     // sample cart items (replace with real data later)
     const [cartItems, setCartItems] = useState([
-        { id: '1', name: 'Nike Air Max', price: 199, image: 'https://picsum.photos/200', checked: false },
-        { id: '2', name: 'Adidas Ultraboost', price: 299, image: 'https://picsum.photos/200', checked: false },
-        { id: '3', name: 'Puma Running', price: 99, image: 'https://picsum.photos/200', checked: false },
+        { id: '1', name: 'PAP SCHOOL', price: 199, image: 'https://picsum.photos/200', checked: false },
+        { id: '2', name: 'CTU NAGA SCHOOL', price: 299, image: 'https://picsum.photos/200', checked: false },
+        { id: '3', name: 'CTU NAGA SCHOOL', price: 99, image: 'https://picsum.photos/200', checked: false },
     ]);
 
     // compute total only for checked items
