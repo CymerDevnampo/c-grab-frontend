@@ -23,7 +23,12 @@ export default function DrawerNavigator({ setIsAuthenticated }) {
             <Drawer.Screen name="Home" options={{ headerShown: true }}>
                 {(props) => <TabsScreen {...props} setIsAuthenticated={setIsAuthenticated} />}
             </Drawer.Screen>
-            <Drawer.Screen name="Subscription" component={SubscriptionScreen} />
+
+            {/* <Drawer.Screen name="Subscription" component={SubscriptionScreen} /> */}
+            <Drawer.Screen name="Subscription" options={{ headerShown: true }}>
+                {(props) => <SubscriptionScreen {...props} setIsAuthenticated={setIsAuthenticated} />}
+            </Drawer.Screen>
+
             <Drawer.Screen name="Be a Campus Courier" component={TaskerSubscriptionScreen} />
         </Drawer.Navigator>
     );
